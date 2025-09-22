@@ -6,8 +6,8 @@ const doc = {
     description: 'API for managing books and authors with full CRUD operations',
     version: '1.0.0',
   },
-  host: 'localhost:3000',
-  schemes: ['http'],
+  host: 'w03-project-project-2-part-1-crud.onrender.com',
+  schemes: ['https'],
   consumes: ['application/json'],
   produces: ['application/json'],
   definitions: {
