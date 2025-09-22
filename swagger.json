@@ -1,0 +1,1007 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Books and Authors API",
+    "description": "API for managing books and authors with full CRUD operations",
+    "version": "1.0.0"
+  },
+  "host": "w03-project-project-2-part-1-crud.onrender.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/books/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/books/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/authors/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/authors/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Book": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Title of the book"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "The Great Gatsby"
+                }
+              }
+            },
+            "author": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Author ID (MongoDB ObjectId)"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "507f1f77bcf86cd799439011"
+                }
+              }
+            },
+            "isbn": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "ISBN number (10-13 digits)"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "9780743273565"
+                }
+              }
+            },
+            "genre": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "enum": {
+                  "type": "array",
+                  "example": [
+                    "Fiction",
+                    "Non-Fiction",
+                    "Science Fiction",
+                    "Mystery",
+                    "Romance",
+                    "Thriller",
+                    "Biography",
+                    "History",
+                    "Self-Help",
+                    "Other"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Genre of the book"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "Fiction"
+                }
+              }
+            },
+            "publicationYear": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "integer"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Year the book was published"
+                },
+                "example": {
+                  "type": "number",
+                  "example": 1925
+                }
+              }
+            },
+            "pages": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "integer"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Number of pages in the book"
+                },
+                "example": {
+                  "type": "number",
+                  "example": 180
+                }
+              }
+            },
+            "price": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "number"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Price of the book"
+                },
+                "example": {
+                  "type": "number",
+                  "example": 12.99
+                }
+              }
+            },
+            "description": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Description of the book"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "A classic American novel set in the Jazz Age"
+                }
+              }
+            }
+          }
+        },
+        "required": {
+          "type": "array",
+          "example": [
+            "title",
+            "author",
+            "isbn",
+            "genre",
+            "publicationYear",
+            "pages",
+            "price",
+            "description"
+          ],
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BookResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Unique identifier for the book"
+                }
+              }
+            },
+            "title": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Title of the book"
+                }
+              }
+            },
+            "author": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    },
+                    "firstName": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    },
+                    "lastName": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Author information"
+                }
+              }
+            },
+            "isbn": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "ISBN number"
+                }
+              }
+            },
+            "genre": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Genre of the book"
+                }
+              }
+            },
+            "publicationYear": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "integer"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Year the book was published"
+                }
+              }
+            },
+            "pages": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "integer"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Number of pages in the book"
+                }
+              }
+            },
+            "price": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "number"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Price of the book"
+                }
+              }
+            },
+            "description": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Description of the book"
+                }
+              }
+            },
+            "createdAt": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "format": {
+                  "type": "string",
+                  "example": "date-time"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Date when the book was created"
+                }
+              }
+            },
+            "updatedAt": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "format": {
+                  "type": "string",
+                  "example": "date-time"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Date when the book was last updated"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Author": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "firstName": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "First name of the author"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "F. Scott"
+                }
+              }
+            },
+            "lastName": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Last name of the author"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "Fitzgerald"
+                }
+              }
+            },
+            "email": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "format": {
+                  "type": "string",
+                  "example": "email"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Email address of the author"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "fitzgerald@example.com"
+                }
+              }
+            },
+            "birthDate": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "format": {
+                  "type": "string",
+                  "example": "date"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Birth date of the author"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "1896-09-24"
+                }
+              }
+            },
+            "nationality": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Nationality of the author"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "American"
+                }
+              }
+            },
+            "biography": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Biography of the author"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "Francis Scott Key Fitzgerald was an American novelist, essayist, and short story writer."
+                }
+              }
+            },
+            "awards": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "string"
+                    }
+                  }
+                },
+                "description": {
+                  "type": "string",
+                  "example": "List of awards received by the author"
+                },
+                "example": {
+                  "type": "array",
+                  "example": [
+                    "Pulitzer Prize",
+                    "National Book Award"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": {
+          "type": "array",
+          "example": [
+            "firstName",
+            "lastName",
+            "email",
+            "birthDate",
+            "nationality",
+            "biography"
+          ],
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AuthorResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Unique identifier for the author"
+                }
+              }
+            },
+            "firstName": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "First name of the author"
+                }
+              }
+            },
+            "lastName": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Last name of the author"
+                }
+              }
+            },
+            "fullName": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Full name of the author (computed field)"
+                }
+              }
+            },
+            "email": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Email address of the author"
+                }
+              }
+            },
+            "birthDate": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "format": {
+                  "type": "string",
+                  "example": "date"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Birth date of the author"
+                }
+              }
+            },
+            "nationality": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Nationality of the author"
+                }
+              }
+            },
+            "biography": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Biography of the author"
+                }
+              }
+            },
+            "awards": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "string"
+                    }
+                  }
+                },
+                "description": {
+                  "type": "string",
+                  "example": "List of awards received by the author"
+                }
+              }
+            },
+            "createdAt": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "format": {
+                  "type": "string",
+                  "example": "date-time"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Date when the author was created"
+                }
+              }
+            },
+            "updatedAt": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "format": {
+                  "type": "string",
+                  "example": "date-time"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Date when the author was last updated"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Error message"
+                }
+              }
+            },
+            "errors": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "object"
+                    }
+                  }
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Detailed validation errors (if applicable)"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
