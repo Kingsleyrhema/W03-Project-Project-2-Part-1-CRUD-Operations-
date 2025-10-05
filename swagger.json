@@ -281,7 +281,7 @@
         }
       }
     },
-    "/api/auth/logout": {
+  "/api/auth/logout": {
       "post": {
         "description": "Logout (client should discard token)",
         "tags": ["Auth"],
@@ -289,26 +289,7 @@
           "200": { "description": "Logged out" }
         }
       }
-    },
-    "/api/auth/google": {
-      "get": {
-        "description": "Initiate Google OAuth",
-        "tags": ["Auth"],
-        "responses": {
-          "302": { "description": "Redirect to Google OAuth" }
-        }
-      }
-    },
-    "/api/auth/google/callback": {
-      "get": {
-        "description": "Google OAuth callback (returns JWT)",
-        "tags": ["Auth"],
-        "responses": {
-          "200": { "description": "OK", "schema": { "$ref": "#/definitions/AuthResponse" } },
-          "302": { "description": "Redirect on failure or success" }
-        }
-      }
-    }
+  }
   },
   "definitions": {
     "Book": {

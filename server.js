@@ -3,8 +3,6 @@ const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 require('dotenv').config();
-const passport = require('passport');
-const cookieSession = require('cookie-session');
 const cors = require('cors');
 
 const app = express();
@@ -14,14 +12,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(cookieSession({
-  name: 'session',
-  keys: [process.env.SESSION_SECRET || 'secretkey'],
-  maxAge: 24 * 60 * 60 * 1000
-}));
-
-// Passport config
-require('./config/passport')(app);
+// (Google OAuth removed) Using local auth with JWT
 
 // Swagger Documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

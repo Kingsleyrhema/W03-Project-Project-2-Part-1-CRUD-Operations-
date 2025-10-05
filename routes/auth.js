@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const passport = require('passport');
 const User = require('../models/User');
 const { body, validationResult } = require('express-validator');
 
@@ -60,14 +59,6 @@ router.post('/logout', (req, res) => {
 });
 
 // Google OAuth routes
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-
-router.get('/google/callback', passport.authenticate('google', { session: false, failureRedirect: '/' }), (req, res) => {
-  // Issue JWT and redirect with token or return token
-  const user = req.user;
-  const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-  // For simplicity, return token as JSON
-  res.json({ token, user: { id: user._id, email: user.email, name: user.name } });
-});
+// Google OAuth removed - using local authentication only
 
 module.exports = router;
