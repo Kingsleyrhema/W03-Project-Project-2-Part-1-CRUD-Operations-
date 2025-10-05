@@ -16,6 +16,14 @@
   "produces": [
     "application/json"
   ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Enter 'Bearer <token>'"
+    }
+  },
   "paths": {
     "/": {
       "get": {
@@ -40,6 +48,7 @@
         }
       },
       "post": {
+        "security": [{ "Bearer": [] }],
         "description": "",
         "responses": {
           "201": {
@@ -78,6 +87,7 @@
         }
       },
       "put": {
+        "security": [{ "Bearer": [] }],
         "description": "",
         "parameters": [
           {
@@ -103,6 +113,7 @@
         }
       },
       "delete": {
+        "security": [{ "Bearer": [] }],
         "description": "",
         "parameters": [
           {
@@ -138,6 +149,7 @@
         }
       },
       "post": {
+        "security": [{ "Bearer": [] }],
         "description": "",
         "responses": {
           "201": {
@@ -152,7 +164,7 @@
         }
       }
     },
-    "/api/authors/{id}": {
+  "/api/authors/{id}": {
       "get": {
         "description": "",
         "parameters": [
@@ -176,6 +188,7 @@
         }
       },
       "put": {
+        "security": [{ "Bearer": [] }],
         "description": "",
         "parameters": [
           {
@@ -201,6 +214,7 @@
         }
       },
       "delete": {
+        "security": [{ "Bearer": [] }],
         "description": "",
         "parameters": [
           {
@@ -220,6 +234,78 @@
           "500": {
             "description": "Internal Server Error"
           }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "description": "Register a new user (local)",
+        "tags": ["Auth"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "Created", "schema": { "$ref": "#/definitions/AuthResponse" } },
+          "400": { "description": "Bad Request" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "description": "Login a user (local)",
+        "tags": ["Auth"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/AuthResponse" } },
+          "400": { "description": "Invalid credentials or Bad Request" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "description": "Logout (client should discard token)",
+        "tags": ["Auth"],
+        "responses": {
+          "200": { "description": "Logged out" }
+        }
+      }
+    },
+    "/api/auth/google": {
+      "get": {
+        "description": "Initiate Google OAuth",
+        "tags": ["Auth"],
+        "responses": {
+          "302": { "description": "Redirect to Google OAuth" }
+        }
+      }
+    },
+    "/api/auth/google/callback": {
+      "get": {
+        "description": "Google OAuth callback (returns JWT)",
+        "tags": ["Auth"],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/AuthResponse" } },
+          "302": { "description": "Redirect on failure or success" }
         }
       }
     }

@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 require('dotenv').config();
+const passport = require('passport');
+const cookieSession = require('cookie-session');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -10,11 +13,21 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+app.use(cookieSession({
+  name: 'session',
+  keys: [process.env.SESSION_SECRET || 'secretkey'],
+  maxAge: 24 * 60 * 60 * 1000
+}));
+
+// Passport config
+require('./config/passport')(app);
 
 // Swagger Documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Routes
+app.use('/api/auth', require('./routes/auth'));
 app.use('/api/books', require('./routes/books'));
 app.use('/api/authors', require('./routes/authors'));
 
@@ -28,17 +41,24 @@ app.get('/', (req, res) => {
 });
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log('Connected to MongoDB');
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI)
+    .then(() => {
+      console.log('Connected to MongoDB');
+      app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+      });
+    })
+    .catch((error) => {
+      console.error('MongoDB connection error:', error);
+      process.exit(1);
     });
-  })
-  .catch((error) => {
-    console.error('MongoDB connection error:', error);
-    process.exit(1);
+} else {
+  console.warn('Warning: MONGODB_URI not set. Starting server without DB connection (some routes will fail).');
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT} (no DB)`);
   });
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {

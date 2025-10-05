@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const Author = require('../models/Author');
+const { authenticateJWT } = require('../middleware/auth');
 
 // Validation middleware
 const validateAuthor = [
@@ -107,7 +108,7 @@ router.get('/:id', async (req, res) => {
  *       500:
  *         description: Internal server error
  */
-router.post('/', validateAuthor, async (req, res) => {
+router.post('/', authenticateJWT, validateAuthor, async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -163,7 +164,7 @@ router.post('/', validateAuthor, async (req, res) => {
  *       500:
  *         description: Internal server error
  */
-router.put('/:id', validateAuthor, async (req, res) => {
+router.put('/:id', authenticateJWT, validateAuthor, async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -215,7 +216,7 @@ router.put('/:id', validateAuthor, async (req, res) => {
  *       500:
  *         description: Internal server error
  */
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authenticateJWT, async (req, res) => {
   try {
     const author = await Author.findByIdAndDelete(req.params.id);
     if (!author) {
