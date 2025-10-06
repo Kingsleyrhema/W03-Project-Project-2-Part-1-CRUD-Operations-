@@ -290,6 +290,29 @@
         }
       }
   }
+  ,
+    "/api/auth/google": {
+      "get": {
+        "description": "Initiate Google OAuth2 login. This endpoint redirects the browser to Google's consent screen. After successful authentication Google will redirect back to the callback URL. In the browser you'll be redirected; in Swagger you can open the URL to begin the flow.",
+        "tags": ["Auth"],
+        "responses": {
+          "302": { "description": "Redirect to Google OAuth" },
+          "400": { "description": "Google credentials not configured on server" }
+        }
+      }
+    },
+    "/api/auth/google/callback": {
+      "get": {
+        "description": "Google OAuth callback. On success the server issues a JWT and returns an `AuthResponse` JSON. If using browser-based flow you'll be redirected; some deployments return JSON containing the token.",
+        "tags": ["Auth"],
+        "parameters": [],
+        "responses": {
+          "200": { "description": "Authenticated - returns JWT", "schema": { "$ref": "#/definitions/AuthResponse" } },
+          "302": { "description": "Redirect on failure or success (browser flow)" },
+          "400": { "description": "Bad Request or missing Google configuration" }
+        }
+      }
+    }
   },
   "definitions": {
     "AuthRequest": {
@@ -1044,7 +1067,7 @@
         }
       }
     },
-    "Error": {
+  "Error": {
       "type": "object",
       "properties": {
         "type": {
