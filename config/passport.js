@@ -16,10 +16,18 @@ module.exports = function (app) {
 
   // Initialize Google strategy only when credentials are present
   if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+    // Normalize callback URL: ensure it ends with '/callback'
+    let callback = process.env.GOOGLE_CALLBACK_URL && process.env.GOOGLE_CALLBACK_URL.trim();
+    if (!callback) callback = '/api/auth/google/callback';
+    if (!callback.endsWith('/callback')) {
+      // avoid double slashes
+      callback = callback.replace(/\/$/, '') + '/callback';
+    }
+
     passport.use(new GoogleStrategy({
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: process.env.GOOGLE_CALLBACK_URL || '/api/auth/google/callback'
+      clientID: process.env.GOOGLE_CLIENT_ID.trim(),
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET.trim(),
+      callbackURL: callback
     }, async (accessToken, refreshToken, profile, done) => {
       try {
         const existing = await User.findOne({ provider: 'google', providerId: profile.id });
