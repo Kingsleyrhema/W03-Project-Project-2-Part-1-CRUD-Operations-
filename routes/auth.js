@@ -76,7 +76,9 @@ router.post('/logout', (req, res) => {
 router.get('/google/url', (req, res) => {
   const clientId = process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_ID.trim();
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET && process.env.GOOGLE_CLIENT_SECRET.trim();
-  const callback = process.env.GOOGLE_CALLBACK_URL && process.env.GOOGLE_CALLBACK_URL.trim();
+  let callback = process.env.GOOGLE_CALLBACK_URL && process.env.GOOGLE_CALLBACK_URL.trim();
+  if (!callback) callback = '/api/auth/google/callback';
+  if (!callback.endsWith('/callback')) callback = callback.replace(/\/$/, '') + '/callback';
   if (!clientId || !clientSecret || !callback) {
     return res.status(400).json({ message: 'Google OAuth not configured on server' });
   }
